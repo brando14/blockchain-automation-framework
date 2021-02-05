@@ -15,7 +15,7 @@
     mode: '0755'
     state: directory
   when: check == "ensure_dir" and (not dir_check.stat.exists)
-  
+
 # This task checks if the vault path already exists
 - name: Check if Kubernetes-auth already created for Organization
   shell: |
