@@ -1,5 +1,5 @@
-apiVersion: batch/v1
-kind: Job
+apiVersion: apps/v1
+kind: Pod
 metadata:
   name: approvechaincode-{{ $.Values.chaincode.name }}-{{ $.Values.chaincode.version }}
   namespace: {{ $.Values.metadata.namespace }}
