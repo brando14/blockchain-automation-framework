@@ -1,0 +1,51 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: channel-carrier-twinbiotchannel
+  namespace: carrier-net
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  releaseName: channel-carrier-twinbiotchannel
+  chart:
+    git: ssh://git@github.com/brando14/blockchain-automation-framework.git
+    ref: master
+    path: platforms/hyperledger-fabric/charts/create_channel   
+  values:
+    metadata:
+      namespace: carrier-net
+      network:
+        version 2.2.0
+      images:
+        fabrictools: hyperledger/fabric-tools:2.2.0
+        alpineutils: index.docker.io/hyperledgerlabs/alpine-utils:1.0
+    peer:
+      name: peer0
+      address: peer0.carrier-net:7051
+      localmspid: carrierMSP
+      loglevel: debug
+      tlsstatus: true
+
+    vault:
+      role: vault-role
+      address: http://34.72.87.207:8200
+      authpath: carrier-net-auth
+      adminsecretprefix: secret/crypto/peerOrganizations/carrier-net/users/admin
+      orderersecretprefix: secret/crypto/peerOrganizations/carrier-net/orderer 
+      serviceaccountname: vault-auth
+      imagesecretname: regcred
+
+    channel:
+      name: twinbiotchannel
+    orderer:
+      address: orderer1.supplychain-net:7050
+    channeltx: |-
+      CuMDCh0KGwgCGgYI5r6VgQYiD3R3aW5iaW90Y2hhbm5lbBLBAwq+AwoPdHdpbmJpb3RjaGFubmVs
+      EkYSNAoLQXBwbGljYXRpb24SJRITCg9tYW51ZmFjdHVyZXJNU1ASABIOCgpjYXJyaWVyTVNQEgAa
+      DgoKQ29uc29ydGl1bRIAGuICErYCCgtBcHBsaWNhdGlvbhKmAggBEhMKD21hbnVmYWN0dXJlck1T
+      UBIAEg4KCmNhcnJpZXJNU1ASABokCgxDYXBhYmlsaXRpZXMSFBIKCggKBFYyXzASABoGQWRtaW5z
+      IiIKB1dyaXRlcnMSFxINCAMSCQoHV3JpdGVycxoGQWRtaW5zIiIKBkFkbWlucxIYEg4IAxIKCgZB
+      ZG1pbnMQAhoGQWRtaW5zIiwKC0VuZG9yc2VtZW50Eh0SEwgDEg8KC0VuZG9yc2VtZW50EAIaBkFk
+      bWlucyI1ChRMaWZlY3ljbGVFbmRvcnNlbWVudBIdEhMIAxIPCgtFbmRvcnNlbWVudBACGgZBZG1p
+      bnMiIgoHUmVhZGVycxIXEg0IAxIJCgdSZWFkZXJzGgZBZG1pbnMqBkFkbWlucxonCgpDb25zb3J0
+      aXVtEhkSFwoVU3VwcGx5Q2hhaW5Db25zb3J0aXVt
