@@ -218,7 +218,8 @@ spec:
         - name: CORE_PEER_LOCALMSPID
           value: {{ $.Values.peer.localmspid }}
         - name: CORE_PEER_TLS_ENABLED
-          value: "{{ $.Values.peer.tlsstatus }}"
+          value: "false"
+        #  value: "{{ $.Values.peer.tlsstatus }}"
         - name: CORE_PEER_TLS_ROOTCERT_FILE
           value: /opt/gopath/src/github.com/hyperledger/fabric/crypto/admin/msp/tlscacerts/tlsca.crt
         - name: ORDERER_CA
