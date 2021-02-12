@@ -164,14 +164,14 @@ spec:
           value: {{ $.Values.peer.localmspid }}
         - name: CORE_PEER_TLS_ENABLED
           value: "{{ $.Values.peer.tlsstatus }}"
-        - name: CORE_PEER_TLS_ROOTCERT_FILE
-          value: /opt/gopath/src/github.com/hyperledger/fabric/crypto/msp/tlscacerts/tlsca.crt
+        #- name: CORE_PEER_TLS_ROOTCERT_FILE
+        #  value: /opt/gopath/src/github.com/hyperledger/fabric/crypto/admin/msp/tlscacerts/tlsca.crt
         - name: ORDERER_CA
           value: /opt/gopath/src/github.com/hyperledger/fabric/crypto/orderer/tls/ca.crt
         - name: ORDERER_URL
           value: {{ $.Values.orderer.address }}
         - name: CORE_PEER_MSPCONFIGPATH
-          value: /opt/gopath/src/github.com/hyperledger/fabric/crypto/msp
+          value: /opt/gopath/src/github.com/hyperledger/fabric/crypto/admin/msp
         - name: CHAINCODE_NAME
           value: "{{ $.Values.chaincode.name }}"
         - name: CHAINCODE_VERSION
