@@ -120,6 +120,7 @@ spec:
           echo "${KEYSTORE}" >> ${OUTPUT_PATH}/keystore/server.key
           echo "${SIGNCERTS}" >> ${OUTPUT_PATH}/signcerts/server.crt
 
+
           ######################################################################
 
           #Downloading Certificates for all admin users
