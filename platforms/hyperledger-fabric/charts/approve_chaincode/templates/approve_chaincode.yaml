@@ -5,7 +5,7 @@ metadata:
   name: approvechaincode-{{ $.Values.chaincode.name }}-{{ $.Values.chaincode.version }}
   namespace: {{ $.Values.metadata.namespace }}
   labels:
-    app: "app = approvechaincode-{{ peer.name }}-{{ peer.chaincode.name }}-{{ peer.chaincode.version }}"
+    app: approvechaincode-{{ $.Values.chaincode.name }}-{{ $.Values.chaincode.version }}
     app.kubernetes.io/name: approvechaincode-{{ $.Values.chaincode.name }}{{ $.Values.chaincode.version }}
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
