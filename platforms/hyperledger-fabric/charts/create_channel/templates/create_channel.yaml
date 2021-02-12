@@ -110,11 +110,12 @@ spec:
           mkdir -p ${OUTPUT_PATH}/keystore
           mkdir -p ${OUTPUT_PATH}/signcerts
 
+
           echo "${ADMINCERT}" >> ${OUTPUT_PATH}/admincerts/admin.crt
           echo "${CACERTS}" >> ${OUTPUT_PATH}/cacerts/ca.crt
           echo "${KEYSTORE}" >> ${OUTPUT_PATH}/keystore/server.key
           echo "${SIGNCERTS}" >> ${OUTPUT_PATH}/signcerts/server.crt
-          echo "${TLSCACERTS}" >> ${OUTPUT_PATH}/tlscacerts/tlsca.crt
+          
         volumeMounts:
         {{ if .Values.vault.tls  }}
         - name: vaultca
