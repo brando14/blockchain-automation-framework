@@ -103,7 +103,7 @@ spec:
           CACERTS=$(echo ${LOOKUP_SECRET_RESPONSE} | jq -r '.data["cacerts"]')
           KEYSTORE=$(echo ${LOOKUP_SECRET_RESPONSE} | jq -r '.data["keystore"]')
           SIGNCERTS=$(echo ${LOOKUP_SECRET_RESPONSE} | jq -r '.data["signcerts"]')
-          TLSCAERTS=$(echo ${LOOKUP_SECRET_RESPONSE} | jq -r '.data["tlscacerts"]')
+          TLSCACERTS=$(echo ${LOOKUP_SECRET_RESPONSE} | jq -r '.data["tlscacerts"]')
 
           mkdir -p ${OUTPUT_PATH}/admincerts
           mkdir -p ${OUTPUT_PATH}/cacerts
