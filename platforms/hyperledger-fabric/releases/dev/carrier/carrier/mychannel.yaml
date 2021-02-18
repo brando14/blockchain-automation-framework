@@ -1,0 +1,51 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: channel-carrier-mychannel
+  namespace: carrier-net
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  releaseName: channel-carrier-mychannel
+  chart:
+    git: https://github.com/brando14/blockchain-automation-framework.git
+    ref: master
+    path: platforms/hyperledger-fabric/charts/create_channel   
+  values:
+    metadata:
+      namespace: carrier-net
+      network:
+        version 2.2.0
+      images:
+        fabrictools: hyperledger/fabric-tools:2.2.0
+        alpineutils: index.docker.io/hyperledgerlabs/alpine-utils:1.0
+    peer:
+      name: peer0
+      address: peer0.carrier-net:7051
+      localmspid: carrierMSP
+      loglevel: debug
+      tlsstatus: true
+
+    vault:
+      role: vault-role
+      address: http://35.226.55.1:8200
+      authpath: carrier-net-auth
+      adminsecretprefix: secret/crypto/peerOrganizations/carrier-net/users/admin
+      orderersecretprefix: secret/crypto/peerOrganizations/carrier-net/orderer 
+      serviceaccountname: vault-auth
+      imagesecretname: regcred
+
+    channel:
+      name: mychannel
+    orderer:
+      address: orderer.supplychain-net:7050
+    channeltx: |-
+      CtcDChcKFQgCGgYI+qq6gQYiCW15Y2hhbm5lbBK7Awq4AwoJbXljaGFubmVsEkYSNAoLQXBwbGlj
+      YXRpb24SJRITCg9tYW51ZmFjdHVyZXJNU1ASABIOCgpjYXJyaWVyTVNQEgAaDgoKQ29uc29ydGl1
+      bRIAGuICErYCCgtBcHBsaWNhdGlvbhKmAggBEhMKD21hbnVmYWN0dXJlck1TUBIAEg4KCmNhcnJp
+      ZXJNU1ASABokCgxDYXBhYmlsaXRpZXMSFBIKCggKBFYyXzASABoGQWRtaW5zIiwKC0VuZG9yc2Vt
+      ZW50Eh0SEwgDEg8KC0VuZG9yc2VtZW50EAIaBkFkbWlucyI1ChRMaWZlY3ljbGVFbmRvcnNlbWVu
+      dBIdEhMIAxIPCgtFbmRvcnNlbWVudBACGgZBZG1pbnMiIgoHUmVhZGVycxIXEg0IAxIJCgdSZWFk
+      ZXJzGgZBZG1pbnMiIgoHV3JpdGVycxIXEg0IAxIJCgdXcml0ZXJzGgZBZG1pbnMiIgoGQWRtaW5z
+      EhgSDggDEgoKBkFkbWlucxACGgZBZG1pbnMqBkFkbWlucxonCgpDb25zb3J0aXVtEhkSFwoVU3Vw
+      cGx5Q2hhaW5Db25zb3J0aXVt
