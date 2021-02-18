@@ -22,7 +22,7 @@ data:
   CORE_PEER_GOSSIP_EXTERNALENDPOINT: {{ $.Values.peer.gossipexternalendpoint }}
   {{ end }}
   #CORE_PEER_LISTENADDRESS: 0.0.0.0:7051
-  CORE_PEER_CHAINCODELISTENADDRESS: 0.0.0.0:7052
+  #CORE_PEER_CHAINCODELISTENADDRESS: 0.0.0.0:7052
   CORE_PEER_LOCALMSPID: {{ $.Values.peer.localmspid }}
   CORE_PEER_TLS_ENABLED: "{{ $.Values.peer.tlsstatus }}"
   CORE_PEER_TLS_CERT_FILE: /etc/hyperledger/fabric/crypto/tls/server.crt
