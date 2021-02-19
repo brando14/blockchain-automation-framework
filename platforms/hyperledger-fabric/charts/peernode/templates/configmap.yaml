@@ -21,8 +21,6 @@ data:
   {{ if $.Values.peer.gossipexternalendpoint }}
   CORE_PEER_GOSSIP_EXTERNALENDPOINT: {{ $.Values.peer.gossipexternalendpoint }}
   {{ end }}
-  CORE_PEER_LISTENADDRESS: 0.0.0.0:7051
-  CORE_PEER_CHAINCODELISTENADDRESS: 0.0.0.0:7052
   CORE_PEER_LOCALMSPID: {{ $.Values.peer.localmspid }}
   CORE_PEER_TLS_ENABLED: "{{ $.Values.peer.tlsstatus }}"
   CORE_PEER_TLS_CERT_FILE: /etc/hyperledger/fabric/crypto/tls/server.crt
@@ -31,7 +29,7 @@ data:
   CORE_PEER_GOSSIP_USELEADERELECTION: "true"
   CORE_PEER_GOSSIP_ORGLEADER: "false"
   CORE_PEER_PROFILE_ENABLED: "true"
-  #CORE_PEER_ADDRESSAUTODETECT: "true"
+  CORE_PEER_ADDRESSAUTODETECT: "true"
   CORE_PEER_NETWORKID: {{ $.Values.peer.name }}.{{ $.Values.metadata.namespace }}
   CORE_PEER_MSPCONFIGPATH: /etc/hyperledger/fabric/crypto/msp
   GODEBUG: "netdns=go"
