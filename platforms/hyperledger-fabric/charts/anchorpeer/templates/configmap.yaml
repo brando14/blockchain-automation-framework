@@ -12,7 +12,7 @@ metadata:
 data:
   CHANNEL_NAME: {{ $.Values.channel.name }}
   FABRIC_LOGGING_SPEC: {{ $.Values.peer.loglevel }}
-  CORE_PEER_ID: {{ $.Values.peer.name }}.{{ $.Values.metadata.namespace }}
+  CORE_PEER_ID: {{ $.Values.peer.name }}-{{ $.Values.metadata.namespace }}
   CORE_PEER_ADDRESS: {{ $.Values.peer.address }}
   CORE_PEER_LOCALMSPID: {{ $.Values.peer.localmspid }}
   CORE_PEER_TLS_ENABLED: "{{ $.Values.peer.tlsstatus }}"
@@ -31,7 +31,7 @@ metadata:
     app.kubernetes.io/name: anchorpeer-{{ $.Values.channel.name }}-{{ $.Values.peer.name }}-artifacts
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
-    app.kubernetes.io/instance: {{ .Release.Name }} 
+    app.kubernetes.io/instance: {{ .Release.Name }}
     {{- include "labels.custom" . | nindent 2 }}
 data:
   anchors.tx.base64: {{ .Values.anchorstx | quote }}
