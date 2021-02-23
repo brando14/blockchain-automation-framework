@@ -25,7 +25,7 @@ data:
   ORDERER_URL: {{ $.Values.orderer.address }}
   CORE_PEER_MSPCONFIGPATH: /opt/gopath/src/github.com/hyperledger/fabric/crypto/admin/msp
 
-  
+
 ---
 apiVersion: v1
 kind: ConfigMap
