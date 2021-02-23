@@ -18,7 +18,7 @@ data:
   CORE_PEER_TLS_ENABLED: "{{ $.Values.peer.tlsstatus }}"
   CORE_PEER_TLS_ROOTCERT_FILE: /opt/gopath/src/github.com/hyperledger/fabric/crypto/admin/msp/tlscacerts/tlsca.crt
   ORDERER_CA: /opt/gopath/src/github.com/hyperledger/fabric/crypto/orderer/tls/ca.crt
-  ORDERER_URL: {{ $.Values.orderer.address }}
+  ORDERER_URL: orderer1.supplychain-net:7050
   CORE_PEER_MSPCONFIGPATH: /opt/gopath/src/github.com/hyperledger/fabric/crypto/admin/msp
 
 ---
