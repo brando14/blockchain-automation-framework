@@ -11,12 +11,12 @@ metadata:
     app.kubernetes.io/name: {{ $.Values.channel.name }}-config
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
-    app.kubernetes.io/instance: {{ .Release.Name }} 
+    app.kubernetes.io/instance: {{ .Release.Name }}
     {{- include "labels.custom" . | nindent 2 }}
 data:
   CHANNEL_NAME: {{ $.Values.channel.name }}
   FABRIC_LOGGING_SPEC: {{ $.Values.peer.loglevel }}
-  CORE_PEER_ID: {{ $.Values.peer.name }}.{{ $.Values.metadata.namespace }}
+  CORE_PEER_ID: {{ $.Values.peer.name }}-{{ $.Values.metadata.namespace }}
   CORE_PEER_ADDRESS: {{ $.Values.peer.address }}
   CORE_PEER_LOCALMSPID: {{ $.Values.peer.localmspid }}
   CORE_PEER_TLS_ENABLED: "{{ $.Values.peer.tlsstatus }}"
@@ -24,7 +24,7 @@ data:
   ORDERER_CA: /opt/gopath/src/github.com/hyperledger/fabric/crypto/orderer/tls/ca.crt
   ORDERER_URL: {{ $.Values.orderer.address }}
   CORE_PEER_MSPCONFIGPATH: /opt/gopath/src/github.com/hyperledger/fabric/crypto/admin/msp
-  
+
   
 ---
 apiVersion: v1
@@ -36,8 +36,7 @@ metadata:
     app.kubernetes.io/name: channel-artifacts-{{ $.Values.channel.name }}
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
-    app.kubernetes.io/instance: {{ .Release.Name }} 
+    app.kubernetes.io/instance: {{ .Release.Name }}
     {{- include "labels.custom" . | nindent 2 }}
 data:
   channel.tx.base64: {{ .Values.channeltx | quote }}
-  
