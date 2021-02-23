@@ -157,7 +157,7 @@ spec:
         - name: FABRIC_LOGGING_SPEC
           value: {{ $.Values.peer.loglevel }}
         - name: CORE_PEER_ID
-          value: {{ $.Values.peer.name }}-{{ $.Values.metadata.namespace }}
+          value: {{ $.Values.peer.name }}.{{ $.Values.metadata.namespace }}
         - name: CORE_PEER_ADDRESS
           value: {{ $.Values.peer.address }}
         - name: CORE_PEER_LOCALMSPID
