@@ -258,7 +258,7 @@ spec:
         - name: ORDERER_CA
           value: /opt/gopath/src/github.com/hyperledger/fabric/crypto/orderer/tls/ca.crt
         - name: ORDERER_URL
-          value: orderer1.supplychain-net:7050
+          value: {{ $.Values.orderer.address }}
         - name: CORE_PEER_MSPCONFIGPATH
           value: /opt/gopath/src/github.com/hyperledger/fabric/crypto/admin/msp
         - name: CHAINCODE_NAME
