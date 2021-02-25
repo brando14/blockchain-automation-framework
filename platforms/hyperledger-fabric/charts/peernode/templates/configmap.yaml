@@ -19,7 +19,7 @@ data:
   CORE_PEER_ADDRESS: {{ $.Values.peer.name }}.{{ $.Values.metadata.namespace }}:{{ $.Values.service.ports.grpc.clusteripport }}
   CORE_PEER_GOSSIP_BOOTSTRAP: {{ $.Values.peer.gossippeeraddress }}
   # {{ if $.Values.peer.gossipexternalendpoint }}
-  # CORE_PEER_GOSSIP_EXTERNALENDPOINT: {{ $.Values.peer.gossipexternalendpoint }}
+  CORE_PEER_GOSSIP_EXTERNALENDPOINT: {{ $.Values.peer.gossippeeraddress }}
   # {{ end }}
   CORE_PEER_CHAINCODELISTENADDRES: 0.0.0.0:7052
   CORE_PEER_LOCALMSPID: {{ $.Values.peer.localmspid }}
