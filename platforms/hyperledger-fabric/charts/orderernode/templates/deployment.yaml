@@ -28,8 +28,8 @@ spec:
         app: {{ $.Values.orderer.name }}
         helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
         app.kubernetes.io/name: {{ $.Values.orderer.name }}
-        app.kubernetes.io/instance: {{ .Release.Name }} 
-    spec:    
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
       serviceAccountName: {{ $.Values.vault.serviceaccountname }}
       imagePullSecrets:
         - name: {{ $.Values.vault.imagesecretname }}
@@ -52,58 +52,58 @@ spec:
             - key: genesis.block.base64
               path: genesis.block.base64
       initContainers:
-      - name: kafka-healthcheck
-        image: {{ $.Values.metadata.images.healthcheck }}
-        imagePullPolicy: Always
-        command: ["sh", "-c"]
-        args:
-        - |-
-          #!/usr/bin/env sh
-          if [ {{ $.Values.consensus.name }} == kafka ]
-          then
-          COUNTER=1
-          FLAG=true
-          KAFKACOUNT=0
-          COUNT=0
-          {{ range $.Values.kafka.brokers}}
-          COUNT=`expr "$COUNT" + 1`
-          {{ end }}
-          while [ "$COUNTER" -le {{ $.Values.kafka.readinessthreshold }} ]
-          do
-             {{ range $.Values.kafka.brokers}}
-             KAFKA_BROKERS={{ .  }}
-             STATUS=$(nc -vz $KAFKA_BROKERS 2>&1 | grep -c open )
-             if [ "$STATUS" == 0 ]
-             then
-                FLAG=false
-             else
-                FLAG=true
-                KAFKACOUNT=`expr "$KAFKACOUNT" + 1`
-                echo "$KAFKACOUNT kafka brokers out of $COUNT are up and running"
-             fi
-             {{ end }}
-             if [ "$FLAG" == false ]
-             then
-                echo "$KAFKACOUNT kafka brokers out of $COUNT are up and running!"
-                echo "Retry attempted $COUNTER times, retrying after {{ $.Values.kafka.readinesscheckinterval }} seconds"
-                COUNTER=`expr "$COUNTER" + 1`
-                sleep {{ $.Values.kafka.readinesscheckinterval }}
-
-             else
-                echo "SUCCESS!"
-                echo "All $KAFKACOUNT kafka broker are up and running!"
-                exit 0
-                break
-             fi
-          done
-          if [ "$COUNTER" -gt {{ $.Values.kafka.readinessthreshold }} ] || [ "$FLAG" == false ]
-          then
-             echo "Retry attempted $COUNTER times, no kafka brokers are up and running. Giving up!"
-             exit 1
-             break
-
-          fi
-          fi
+      # - name: kafka-healthcheck
+      #   image: {{ $.Values.metadata.images.healthcheck }}
+      #   imagePullPolicy: Always
+      #   command: ["sh", "-c"]
+      #   args:
+      #   - |-
+      #     #!/usr/bin/env sh
+      #     if [ {{ $.Values.consensus.name }} == kafka ]
+      #     then
+      #     COUNTER=1
+      #     FLAG=true
+      #     KAFKACOUNT=0
+      #     COUNT=0
+      #     {{ range $.Values.kafka.brokers}}
+      #     COUNT=`expr "$COUNT" + 1`
+      #     {{ end }}
+      #     while [ "$COUNTER" -le {{ $.Values.kafka.readinessthreshold }} ]
+      #     do
+      #        {{ range $.Values.kafka.brokers}}
+      #        KAFKA_BROKERS={{ .  }}
+      #        STATUS=$(nc -vz $KAFKA_BROKERS 2>&1 | grep -c open )
+      #        if [ "$STATUS" == 0 ]
+      #        then
+      #           FLAG=false
+      #        else
+      #           FLAG=true
+      #           KAFKACOUNT=`expr "$KAFKACOUNT" + 1`
+      #           echo "$KAFKACOUNT kafka brokers out of $COUNT are up and running"
+      #        fi
+      #        {{ end }}
+      #        if [ "$FLAG" == false ]
+      #        then
+      #           echo "$KAFKACOUNT kafka brokers out of $COUNT are up and running!"
+      #           echo "Retry attempted $COUNTER times, retrying after {{ $.Values.kafka.readinesscheckinterval }} seconds"
+      #           COUNTER=`expr "$COUNTER" + 1`
+      #           sleep {{ $.Values.kafka.readinesscheckinterval }}
+      #
+      #        else
+      #           echo "SUCCESS!"
+      #           echo "All $KAFKACOUNT kafka broker are up and running!"
+      #           exit 0
+      #           break
+      #        fi
+      #     done
+      #     if [ "$COUNTER" -gt {{ $.Values.kafka.readinessthreshold }} ] || [ "$FLAG" == false ]
+      #     then
+      #        echo "Retry attempted $COUNTER times, no kafka brokers are up and running. Giving up!"
+      #        exit 1
+      #        break
+      #
+      #     fi
+      #     fi
       - name: certificates-init
         image: {{ $.Values.metadata.images.alpineutils }}
         imagePullPolicy: Always
@@ -210,7 +210,7 @@ spec:
   volumeClaimTemplates:
   #Lables are not being taken by Kubernetes as it dynamically creates PVC
   - metadata:
-      name: datadir    
+      name: datadir
     spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: {{ $.Values.storage.storageclassname }}
