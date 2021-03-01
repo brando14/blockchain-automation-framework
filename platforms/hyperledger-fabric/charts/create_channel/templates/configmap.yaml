@@ -24,8 +24,8 @@ data:
   ORDERER_CA: /opt/gopath/src/github.com/hyperledger/fabric/crypto/orderer/tls/ca.crt
   ORDERER_URL: {{ $.Values.orderer.address }}
   CORE_PEER_MSPCONFIGPATH: /opt/gopath/src/github.com/hyperledger/fabric/crypto/admin/msp
-
-
+  
+  
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -36,7 +36,8 @@ metadata:
     app.kubernetes.io/name: channel-artifacts-{{ $.Values.channel.name }}
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }} 
     {{- include "labels.custom" . | nindent 2 }}
 data:
   channel.tx.base64: {{ .Values.channeltx | quote }}
+  
