@@ -48,5 +48,5 @@ spec:
         git_username: "brando14"
         url: github.com/brando14/blockchain-automation-framework.git
         branch: master
-        path: smart-contract/contract-tutorial/
+        path: smart-contract/
       endorsementpolicies:  ''
