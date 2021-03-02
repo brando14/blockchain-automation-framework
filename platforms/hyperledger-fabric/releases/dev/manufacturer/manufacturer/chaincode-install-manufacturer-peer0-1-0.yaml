@@ -42,11 +42,11 @@ spec:
       name: basic
       version: 1.0
       lang: golang
-      maindirectory: 
+      maindirectory: contract-tutorial
       repository:
         hostname: "github.com"
         git_username: "brando14"
         url: github.com/brando14/blockchain-automation-framework.git
         branch: master
-        path: smart-contract/contract-tutorial
+        path: smart-contract/
       endorsementpolicies:  ''
