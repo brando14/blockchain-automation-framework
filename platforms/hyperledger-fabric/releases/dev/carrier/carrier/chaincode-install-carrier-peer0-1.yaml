@@ -1,19 +1,19 @@
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
-  name: chaincode-install-manufacturer-peer0-1-0
-  namespace: manufacturer-net
+  name: chaincode-install-carrier-peer0-1
+  namespace: carrier-net
   annotations:
     fluxcd.io/automated: "false"
 spec:
-  releaseName: chaincode-install-manufacturer-peer0-1-0
+  releaseName: chaincode-install-carrier-peer0-1
   chart:
     git: https://github.com/brando14/blockchain-automation-framework.git
     ref: master
     path: platforms/hyperledger-fabric/charts/install_chaincode
   values:
     metadata:
-      namespace: manufacturer-net
+      namespace: carrier-net
       network:
         version: 2.2.0
       images:
@@ -21,32 +21,32 @@ spec:
         alpineutils: index.docker.io/hyperledgerlabs/alpine-utils:1.0
     peer:
       name: peer0
-      address: peer0.manufacturer-net:7051
-      localmspid: manufacturerMSP
+      address: peer0.carrier-net:7051
+      localmspid: carrierMSP
       loglevel: debug
       tlsstatus: true
     vault:
       role: vault-role
       address: http://35.193.50.86:8200
-      authpath: manufacturer-net-auth
-      adminsecretprefix: secret/crypto/peerOrganizations/manufacturer-net/users/admin 
-      orderersecretprefix: secret/crypto/peerOrganizations/manufacturer-net/orderer
+      authpath: carrier-net-auth
+      adminsecretprefix: secret/crypto/peerOrganizations/carrier-net/users/admin 
+      orderersecretprefix: secret/crypto/peerOrganizations/carrier-net/orderer
       serviceaccountname: vault-auth
       imagesecretname: regcred
-      secretgitprivatekey: secret/credentials/manufacturer-net/git?git_password
+      secretgitprivatekey: secret/credentials/carrier-net/git?git_password
       tls: false
     orderer:
       address: orderer1.supplychain-net:7050
     chaincode:
       builder: hyperledger/fabric-ccenv:2.2.0
-      name: basic
-      version: 1.0
+      name: supplychain
+      version: 1
       lang: golang
-      maindirectory: contract-tutorial
+      maindirectory: cmd
       repository:
         hostname: "github.com"
         git_username: "brando14"
         url: github.com/brando14/blockchain-automation-framework.git
         branch: master
-        path: smart-contract/
+        path: examples/supplychain-app/fabric/chaincode_rest_server/chaincode/
       endorsementpolicies:  ''
