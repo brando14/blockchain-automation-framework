@@ -164,7 +164,7 @@ spec:
             cd $GOPATH/src/github.com/chaincode && dep ensure
 
             #chaincode path
-            CC_SRC_PATH="github.com/chaincode/${CHAINCODE_MAINDIR}"
+            CC_SRC_PATH="github.com/chaincode/${CHAINCODE_NAME}/${CHAINCODE_MAINDIR}"
 
           elif [ ${CC_RUNTIME_LANGUAGE} = "java" ]
           then
