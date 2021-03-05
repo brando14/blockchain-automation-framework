@@ -146,6 +146,8 @@ spec:
         - |-
           #!/bin/bash sh
           ## Git repository clone for chaincode
+          go get github.com/hyperledger/fabric-contract-api-go/contractapi
+          go get github.com/rafatorrealba/hlf-iota-conector/iota
           mkdir -p /root/.ssh/
           apk add curl openssh
           ssh-keyscan {{ $.Values.chaincode.repository.hostname }} > /root/.ssh/known_hosts
@@ -163,8 +165,9 @@ spec:
             mkdir -p $GOPATH/bin && curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
             cd $GOPATH/src/github.com/chaincode && dep ensure
 
+
             #chaincode path
-            CC_SRC_PATH="github.com/chaincode/${CHAINCODE_NAME}/${CHAINCODE_MAINDIR}"
+            CC_SRC_PATH="github.com/chaincode/${CHAINCODE_MAINDIR}"
 
           elif [ ${CC_RUNTIME_LANGUAGE} = "java" ]
           then
