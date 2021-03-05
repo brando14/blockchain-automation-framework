@@ -147,7 +147,8 @@ spec:
           #!/bin/bash sh
           ## Git repository clone for chaincode
           go get github.com/hyperledger/fabric-contract-api-go/contractapi
-          go get github.com/rafatorrealba/hlf-iota-conector/iota
+          #go get github.com/rafatorrealba/hlf-iota-conector/iota
+
           mkdir -p /root/.ssh/
           apk add curl openssh
           ssh-keyscan {{ $.Values.chaincode.repository.hostname }} > /root/.ssh/known_hosts
